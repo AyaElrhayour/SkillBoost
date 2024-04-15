@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->enum('type', ['pdf', 'video', 'blog', 'book', 'podcast']);
+            $table->foreignId("course_id")
+                ->constrained("courses")
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
