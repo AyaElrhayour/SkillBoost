@@ -1,61 +1,5 @@
 <?php
 
-// namespace App\Http\Controllers;
-
-// use App\Models\User;
-// use Illuminate\Http\Request;
-// use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Hash;
-
-// class AuthController extends Controller
-// {
-//     public function register( Request $request){
-//         $data = $request->validate([
-//             'name' => 'required',
-//             'email' => 'required|unique:users',
-//             'password' => 'required',
-//             'role' => 'in:Admin,Teacher,Student',
-//         ]);
-
-//         $data['password'] = Hash::make($data['password']);
-
-//         $user = User::create($data);
-//         $token = $user->createToken('my-token')->plainTextToken;
-
-//         return response()->json([
-//             'data' => $user,
-//             'token' =>$token,
-//             'Type' => 'Bearer'
-//         ]);
-//     }
-
-//     public function login(Request $request)
-//     {
-//         $fields = $request->validate([
-
-//             'email' => 'required',
-//             'password' => 'required',
-//         ]);
-
-//         $user = User::where('email', $fields['email'])->first();
-
-//         if (!$user || !Hash::check($fields['password'], $user->password)) {
-//             return response([
-//                 'message' => 'Wrong credentials'
-//             ]);
-//         }
-
-//         $token = $user->createToken('my-token')->plainTextToken;
-
-//         return response()->json([
-//             'token' => $token,
-//             'Type' => 'Bearer',
-//             'role' => $user->role 
-//         ]);
-//     }
-// }
-
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -106,6 +50,23 @@ class AuthController extends Controller
             'access_token' => $user->createToken('api_token')->plainTextToken,
             'token_type' => 'Bearer',
         ], 201);
+    }
+
+    public function logout()
+    {
+        $user = auth()->user();
+    
+        if ($user) {
+            $user->tokens()->delete();
+    
+            return [
+                'message' => 'User logged out'
+            ];
+        }
+    
+        return response()->json([
+            'message' => 'Unauthenticated'
+        ], 401);
     }
 }
 
