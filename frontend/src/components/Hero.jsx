@@ -9,15 +9,15 @@ const Hero = () => {
       <Navigation />
       <div className="flex gap-8 items-center">
         <div className="flex flex-col items-start gap-8 w-2/3">
-          <h1 className="text-4xl font-bold text-white ">
-            <span className="text-blue-800 ">Studying</span> Online is now much
+          <h1 className="text-5xl font-bold text-white ">
+            <span className="text-[#001D6E] ">Studying</span> Online is now much
             easier
           </h1>
-          <p className="text-xl text-left text-white">
+          <p className="text-2xl text-left text-white">
             SkillBoost is an interesting platform that will teach you in more an
             interactive way
           </p>
-          <Button bgColor="bg-red-100" content={"Join for free"} />
+          <Button bgColor="bg-red-100" textSize="text-lg" content={"Join for free"} />
         </div>
         <div>
           <img src="/src/assets/heropic.png" alt="" />
