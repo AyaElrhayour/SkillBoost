@@ -7,11 +7,12 @@ const Button = ({
   onClick,
   radius = "rounded-full",
   width = "w-auto",
+  textSize = "text-l"
 }) => {
   return (
     <button
       onClick={onClick}
-      className={`text-l font-semibold px-6 py-2 ${border} ${bgColor} ${color} ${radius} ${width} ${height}`}
+      className={` font-semibold px-6 py-2 ${textSize} ${border} ${bgColor} ${color} ${radius} ${width} ${height}`}
     >
       {content}
     </button>
