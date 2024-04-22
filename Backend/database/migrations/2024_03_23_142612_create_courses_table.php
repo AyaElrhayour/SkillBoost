@@ -26,7 +26,7 @@ return new class extends Migration
                 ->constrained("users")
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamps();
         });
     }
 
