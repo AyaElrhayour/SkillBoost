@@ -28,7 +28,6 @@ class StoreCourseRequest extends FormRequest
             'level' => 'required',
             'cover' => 'required',
             'topic_id' => 'required',
-            'user_id' => 'required',
         ];
     }
     
