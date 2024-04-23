@@ -21,12 +21,12 @@ class CourseController extends Controller
     public function store(StoreCourseRequest $request)
     {
         $validated = $request->validated();
-        $validated['user_id'] = Auth::id();
+        $validated['user_id'] = auth("sanctum")->id();
         
         $course = Course::create($validated);
         return new CourseResource($course);
     }
-
+ 
     public function show(Request $request, Course $course)
     {
         return new CourseResource($course);
