@@ -1,7 +1,7 @@
 import calander from "../assets/calander.png";
 import people from "../assets/people.png";
 import document from "../assets/document.png";
-import DescriptionCard from "../shared/MyCard";
+import MyCard from "../shared/MyCard";
 
 const Description = () => {
   return (
@@ -16,7 +16,7 @@ const Description = () => {
         </p>
       </div>
       <div className="grid grid-cols-3 gap-16 mx-20 justify-items-center">
-        <DescriptionCard
+        <MyCard
           title={" Online Billing, Invoicing, & Contracts"}
           description={
             "Simple and secure control of your organization’s financial and legal transactions. Send customized invoices and contracts"
@@ -24,14 +24,14 @@ const Description = () => {
           document={document}
         />
 
-        <DescriptionCard
+        <MyCard
           document={calander}
           title={"Easy Scheduling & Attendance Tracking"}
           description={
             "Schedule and reserve classrooms at one campus or multiple campuses. Keep detailed records of student attendance"
           }
         />
-        <DescriptionCard
+        <MyCard
           document={people}
           title={"Customer Tracking"}
           description={
