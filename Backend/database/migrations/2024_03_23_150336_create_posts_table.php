@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('img');
             $table->boolean("approved")->default(false);
             $table->timestamps();
+            $table->foreignId("topic_id")
+                ->constrained("topics")
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->foreignId("user_id")
                 ->constrained("users")
                 ->cascadeOnUpdate()

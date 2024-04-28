@@ -18,6 +18,7 @@ class Post extends Model
         'content',
         'approved',
         'user_id',
+        'topic_id',
         'img'
     ];
 

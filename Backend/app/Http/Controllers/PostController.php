@@ -15,7 +15,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        return new PostCollection(Post::with("user", "comments")->get());
+        return new PostCollection(Post::with("user", "comments", "topic")->get());
     }
 
     public function store(StorePostRequest $request)
@@ -31,7 +31,7 @@ class PostController extends Controller
 
     public function show(Request $request, Post $post)
     {
-        $post->load("user", "comments");
+        $post->load("user", "comments", "topic");
         return new PostResource($post);
     }
 
