@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -28,15 +28,26 @@ const LoginPage = () => {
         console.log(res);
         const accessToken = res.payload.access_token;
         Cookies.set("token", accessToken, { expires: 1 });
-        const token = Cookies.get("token");
-        if (token) {
-          navigate("/teacherDashboard");
+        Cookies.set("user_id", res.payload.data.id);
+        if (res.payload.data.role == "Admin") {
+          navigate("/adminDashboard");
+        } else if (res.payload.data.role == "Teacher") {
+          navigate("/adminDashboard");
+        } else {
+          navigate("/blog");
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      navigate("/blog");
+    }
+  });
   return (
     <>
       <div className="w-full flex flex-wrap">
