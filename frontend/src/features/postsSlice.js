@@ -5,7 +5,6 @@ export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
   async () => {
     const response = await API.get('posts');
-    console.log(response.data.data);
     return response.data.data;
   }
 );

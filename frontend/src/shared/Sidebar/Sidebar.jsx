@@ -1,14 +1,10 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/dashlogo.png";
-import NotificationDropdown from "../Dropdowns/NotificationDropdown";
-import UserDropdown from "../Dropdowns/UserDropdown";
+import Cookies from "js-cookie";
 import Dashicon from "../../assets/dashicon.png";
 import seticon from "../../assets/seticon.png";
 import courseicon from "../../assets/courseicon.png";
-
-
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
@@ -20,9 +16,8 @@ export default function Sidebar() {
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
           >
-           <img src={Logo} alt="" />
+            <img src={Logo} alt="" />
           </Link>
-
 
           {/* Collapse */}
           <div
@@ -31,8 +26,6 @@ export default function Sidebar() {
               collapseShow
             }
           >
-
-
             {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex text-white flex-col list-none gap-4">
@@ -81,8 +74,25 @@ export default function Sidebar() {
                 </Link>
               </li>
 
+              {Cookies.get("role") != "Admin" ? (
+                <li className="items-center">
+                  <Link
+                    className={
+                      "text-xs uppercase py-3 font-bold flex items-center gap-2 " +
+                      (window.location.href.indexOf("/myPosts") !== -1
+                        ? "text-lightBlue-500 hover:text-lightBlue-600"
+                        : "text-blueGray-700 hover:text-blueGray-500")
+                    }
+                    to="/myPosts"
+                  >
+                    <img src={seticon} alt="" />
+                    My Posts
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
             </ul>
-
           </div>
         </div>
       </nav>
