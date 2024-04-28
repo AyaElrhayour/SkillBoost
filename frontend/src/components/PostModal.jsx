@@ -1,18 +1,21 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../features/postsSlice";
 import Button from "../shared/Button";
+import { fetchTopics } from "../features/topicSlice";
 
 const PostModal = ({ open, setOpen }) => {
   const cancelButtonRef = useRef(null);
   const dispatch = useDispatch();
+  const topics = useSelector((state) => state.topics.topics);
 
-  const [img, setImage] = useState(null);
+  const [img, setImg] = useState(null);
 
   const [inputs, setInputs] = useState({
     title: "",
     content: "",
+    topic_id: 0,
   });
 
   const handleChange = (e) => {
@@ -25,20 +28,26 @@ const PostModal = ({ open, setOpen }) => {
 
   const handleImage = (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]);
+      setImg(e.target.files[0]);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputs);
     const formData = new FormData();
     formData.append("title", inputs.title);
     formData.append("content", inputs.content);
+    formData.append("topic_id", inputs.topic_id);
     formData.append("img", img);
 
     dispatch(createPost(formData));
     setOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(fetchTopics());
+  }, []);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -124,6 +133,29 @@ const PostModal = ({ open, setOpen }) => {
                             className="block px-4 w-full h-8 rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />
                         </div>
+                      </div>
+
+                      <div className="text-left w-full">
+                        <label
+                          htmlFor="topic"
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          Topic
+                        </label>
+                        <select
+                          id="topic"
+                          name="topic_id"
+                          value={inputs.topic_id}
+                          onChange={handleChange}
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        >
+                          <option defaultValue={""}>Select topic</option>
+                          {topics.map((topic) => (
+                            <option key={topic.id} value={topic.id}>
+                              {topic.name}
+                            </option>
+                          ))}
+                        </select>
                       </div>
 
                       <div className="text-left w-full">

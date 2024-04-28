@@ -24,10 +24,9 @@ class StorePostRequest extends FormRequest
         return [
             'title'  => 'required',
             'content'  => 'required',
-            'approved'  => 'required',
             'user_id'  => 'required',
             'topic_id'  => 'required',
-            'img'  => 'required',
+            'img'  => 'required|file',
         ];
     }
 }

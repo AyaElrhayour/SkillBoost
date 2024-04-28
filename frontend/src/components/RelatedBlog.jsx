@@ -1,11 +1,19 @@
 import BlogCard from "./BlogCard";
 import Meet from "../assets/meet.png";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PostModal from "./PostModal";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../features/postsSlice";
 
 const RelatedBlog = () => {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.posts);
+
+  useEffect(() => {
+    dispatch(fetchPosts());
+  }, []);
   return (
     <div className="flex flex-col justify-center gap-6 py-8 bg-[#E2F0FF]">
       <div className="flex justify-around gap-[40rem]">
@@ -22,7 +30,10 @@ const RelatedBlog = () => {
         )}
       </div>
       <div className="flex justify-center gap-16">
-        <BlogCard />
+        {posts &&
+          posts.map((post) => (
+            <BlogCard key={post.id} post={post} CoverImg={Meet} />
+          ))}
         <BlogCard CoverImg={Meet} />
       </div>
       {open ? <PostModal open={open} setOpen={setOpen} /> : ""}

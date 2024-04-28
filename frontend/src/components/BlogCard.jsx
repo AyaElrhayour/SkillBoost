@@ -1,7 +1,7 @@
 import Teacher from "../assets/teacher.png";
 import Account from "../shared/Account";
 import Eye from "../assets/eyeIcon.png";
-const BlogCard = ({ CoverImg = Teacher }) => {
+const BlogCard = ({ CoverImg = Teacher, post }) => {
   return (
     <div className="flex flex-col bg-white gap-4 items-stretch w-1/3 rounded-[10px] [box-shadow:_0.3em_0.3em_1em_rgba(0,0,0,0.1)] px-4 py-6">
       <div
