@@ -11,13 +11,11 @@ const BlogCard = ({ CoverImg = Teacher, post }) => {
 
       <div className="flex flex-col gap-4 ">
         <h2 className="text-[#252641] text-lg font-semibold">
-          Class adds $30 million to its balance sheet for a Zoom-friendly edtech
-          solution
+          {post.title}
         </h2>
         <Account />
         <p>
-          Class, launched less than a year ago by Blackboard co-founder Michael
-          Chasen, integrates exclusively...
+          {post.content}
         </p>
         <div className="flex items-center">
           <img src={Eye} alt="" />

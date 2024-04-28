@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Comment extends Model
 {
     use HasFactory;
-    protected $table = "comment";
+    protected $table = "comments";
 
     protected $fillable = [
         'content',

@@ -34,7 +34,6 @@ const RelatedBlog = () => {
           posts.map((post) => (
             <BlogCard key={post.id} post={post} CoverImg={Meet} />
           ))}
-        <BlogCard CoverImg={Meet} />
       </div>
       {open ? <PostModal open={open} setOpen={setOpen} /> : ""}
     </div>

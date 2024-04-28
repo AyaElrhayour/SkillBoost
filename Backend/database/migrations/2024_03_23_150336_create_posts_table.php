@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->boolean("approved")->default(false);
             $table->timestamps();
             $table->foreignId("topic_id")

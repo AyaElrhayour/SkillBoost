@@ -29,6 +29,7 @@ const LoginPage = () => {
         const accessToken = res.payload.access_token;
         Cookies.set("token", accessToken, { expires: 1 });
         Cookies.set("user_id", res.payload.data.id);
+        Cookies.set("role", res.payload.data.role);
         if (res.payload.data.role == "Admin") {
           navigate("/adminDashboard");
         } else if (res.payload.data.role == "Teacher") {
