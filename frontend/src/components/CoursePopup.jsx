@@ -10,6 +10,7 @@ const CoursePopup = ({ open, setOpen, course }) => {
   const dispatch = useDispatch();
   const topics = useSelector((state) => state.topics.topics);
 
+  const [cover, setCover] = useState(null);
   const [inputs, setInputs] = useState({
     title: course?.title || "",
     description: course?.description || "",
@@ -17,6 +18,12 @@ const CoursePopup = ({ open, setOpen, course }) => {
     cover: course?.cover || "",
     topic_id: course?.topic_id || 0,
   });
+
+  const handleCover = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setCover(e.target.files[0]);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,11 +35,17 @@ const CoursePopup = ({ open, setOpen, course }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", inputs.title);
+    formData.append("description", inputs.description);
+    formData.append("topic_id", inputs.topic_id);
+    formData.append("level", inputs.level);
+    formData.append("cover", cover);
     if (course == null) {
       console.log(inputs);
-      dispatch(createCourse(inputs));
+      dispatch(createCourse(formData));
     } else {
-      dispatch(updateCourse({ id: course.id, data: inputs }));
+      dispatch(updateCourse({ id: course.id, data: formData }));
     }
     setOpen(false);
   };
@@ -97,10 +110,10 @@ const CoursePopup = ({ open, setOpen, course }) => {
                         </label>
                         <div className="mt-1">
                           <input
-                            type="text"
+                            type="file"
                             name="cover"
                             value={inputs.cover}
-                            onChange={handleChange}
+                            onChange={handleCover}
                             id="cover"
                             className="block px-4 w-full h-8 rounded-md border-2 border-gray-400 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           />

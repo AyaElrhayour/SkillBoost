@@ -4,7 +4,11 @@ import Button from "../Button";
 import TopicPopup from "../TopicPopup";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTopics, deleteTopic, updateTopic } from "../../features/topicSlice";
+import {
+  fetchTopics,
+  deleteTopic,
+  updateTopic,
+} from "../../features/topicSlice";
 
 export default function CardTable({ color }) {
   const dispatch = useDispatch();
@@ -92,7 +96,7 @@ export default function CardTable({ color }) {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(topics) && topics.length > 0 ? (
+              {topics.length > 0 ? (
                 topics.map((topic) => (
                   <tr key={topic.id}>
                     <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">

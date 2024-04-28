@@ -22,6 +22,8 @@ class CourseController extends Controller
     {
         $validated = $request->validated();
         $validated['user_id'] = auth("sanctum")->id();
+        $coverPath = $request->file('cover')->store('coursesCover', 'public');
+        $validated['cover'] = $coverPath;
 
         $course = Course::create($validated);
         return new CourseResource($course);

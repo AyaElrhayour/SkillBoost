@@ -32,7 +32,7 @@ const LoginPage = () => {
         if (res.payload.data.role == "Admin") {
           navigate("/adminDashboard");
         } else if (res.payload.data.role == "Teacher") {
-          navigate("/adminDashboard");
+          navigate("/teacherDashboard");
         } else {
           navigate("/blog");
         }
