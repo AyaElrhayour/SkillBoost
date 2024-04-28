@@ -30,10 +30,7 @@ const RelatedBlog = () => {
         )}
       </div>
       <div className="flex justify-center gap-16">
-        {posts &&
-          posts.map((post) => (
-            <BlogCard key={post.id} post={post} CoverImg={Meet} />
-          ))}
+        {posts && posts.map((post) => <BlogCard key={post.id} post={post} />)}
       </div>
       {open ? <PostModal open={open} setOpen={setOpen} /> : ""}
     </div>

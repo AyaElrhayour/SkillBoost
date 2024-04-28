@@ -43,8 +43,10 @@ class AuthController extends Controller
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
-        $user =User::create($validated);
-        
+        $profilePicPath = $request->file('profile_pic')->store('profilePics', 'public');
+        $validated['profile_pic'] = $profilePicPath;
+        $user = User::create($validated);
+
         return response()->json([
             'data' => $user,
             'access_token' => $user->createToken('api_token')->plainTextToken,
@@ -55,18 +57,17 @@ class AuthController extends Controller
     public function logout()
     {
         $user = auth()->user();
-    
+
         if ($user) {
             $user->tokens()->delete();
-    
+
             return [
                 'message' => 'User logged out'
             ];
         }
-    
+
         return response()->json([
             'message' => 'Unauthenticated'
         ], 401);
     }
 }
-

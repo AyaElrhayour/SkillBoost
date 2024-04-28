@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../features/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../features/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [inputs, setInputs] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: '',
+    name: "",
+    email: "",
+    password: "",
+    role: "",
   });
+  const [profilePic, setProfilePic] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
@@ -22,18 +23,22 @@ const RegisterPage = () => {
     }));
   };
 
+  const handleProfilePic = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setProfilePic(e.target.files[0]);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    // Check if any required field is empty
-    if (!inputs.name || !inputs.email || !inputs.password || !inputs.role) {
-      // Display error message or perform some action
-      console.log('Please fill in all fields.');
-      return;
-    }
-    dispatch(registerUser(inputs))
+    const formData = new FormData();
+    formData.append("name", inputs.name);
+    formData.append("email", inputs.email);
+    formData.append("password", inputs.password);
+    formData.append("role", inputs.role);
+    formData.append("profile_pic", profilePic);
+    dispatch(registerUser(formData))
       .then(() => {
-        navigate('/login');
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -93,10 +98,22 @@ const RegisterPage = () => {
                   Choose your role
                 </label>
                 <select name="role" onChange={handleChange} id="">
-                <option selected>choose your role</option>
+                  <option selected>choose your role</option>
                   <option value="Teacher">Teacher</option>
                   <option value="Student">Student</option>
                 </select>
+              </div>
+              <div className="flex flex-col pt-4">
+                <label htmlFor="profile_pic" className="text-lg">
+                  Profile Pic
+                </label>
+                <input
+                  type="file"
+                  id="profile_pic"
+                  name="profile_pic"
+                  onChange={handleProfilePic}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
 
               <button

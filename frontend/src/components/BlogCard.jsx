@@ -4,6 +4,9 @@ import Eye from "../assets/eyeIcon.png";
 import { useNavigate } from "react-router-dom";
 const BlogCard = ({ CoverImg = Teacher, post }) => {
   const navigate = useNavigate();
+  const getUserImage = (img) => {
+    return `http://localhost:8000/storage/${img}`;
+  };
   return (
     <div className="flex flex-col bg-white gap-4 items-stretch w-1/3 rounded-[10px] [box-shadow:_0.3em_0.3em_1em_rgba(0,0,0,0.1)] px-4 py-6">
       <div
@@ -13,7 +16,15 @@ const BlogCard = ({ CoverImg = Teacher, post }) => {
 
       <div className="flex flex-col gap-4 ">
         <h2 className="text-[#252641] text-lg font-semibold">{post.title}</h2>
-        <Account />
+        <div className="flex justify-left items-center gap-4 p-4">
+          <img
+            src={getUserImage(post.user.profile_pic)}
+            className="rounded-full w-12 h-12"
+            alt=""
+          />
+          <h3 className="font-semibold text-xl">{post.user.name}</h3>
+        </div>
+
         <p>{post.content}</p>
         <div className="flex items-center">
           <img src={Eye} alt="" />
