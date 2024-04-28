@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
 {
@@ -17,6 +18,7 @@ class Post extends Model
         'content',
         'approved',
         'user_id',
+        'img'
     ];
 
     protected $hidden = [
@@ -33,10 +35,15 @@ class Post extends Model
         return $this->belongsTo(Topic::class, 'topic_id');
     }
 
-    protected static function booted(): void{
-
-        static::addGlobalScope('user', function (Builder $builder) {
-            $builder->where('user_id', Auth::id());
-        });
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
+
+    // protected static function booted(): void{
+
+    //     static::addGlobalScope('user', function (Builder $builder) {
+    //         $builder->where('user_id', Auth::id());
+    //     });
+    // }
 }

@@ -24,7 +24,8 @@ class StoreChapterRequest extends FormRequest
         return [
             'title'  => 'required',
             'content'  => 'required',
-            'type'  => 'required',
+            'course_id'  => 'required',
+            'attachment'  => 'required|sometimes',
         ];
     }
 }

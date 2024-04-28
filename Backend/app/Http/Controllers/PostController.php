@@ -15,20 +15,23 @@ class PostController extends Controller
 {
     public function index()
     {
-        return new PostCollection(Post::all());
+        return new PostCollection(Post::with("user", "comments")->get());
     }
 
     public function store(StorePostRequest $request)
     {
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
-        
+        $validated['approved'] = false;
+        $attachmentPath = $request->file('img')->store('postImages', 'public');
+        $validated['img'] = $attachmentPath;
         $post = Post::create($validated);
         return new PostResource($post);
     }
 
     public function show(Request $request, Post $post)
     {
+        $post->load("user", "comments");
         return new PostResource($post);
     }
 

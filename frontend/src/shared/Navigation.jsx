@@ -11,7 +11,7 @@ const Navigation = ({
 }) => {
   return (
     <nav>
-      <div className={`flex justify-between items-center ${margin}`}>
+      <div className={`flex justify-around items-center ${margin}`}>
         <ul className={`flex gap-20 items-center text-lg font-semibold ${textColor}`}>
           <li>Home</li>
           <li>Course</li>
@@ -28,7 +28,7 @@ const Navigation = ({
           </div>
         ) : (
           
-          <Account/>
+          <Account />
         )}
       </div>
     </nav>

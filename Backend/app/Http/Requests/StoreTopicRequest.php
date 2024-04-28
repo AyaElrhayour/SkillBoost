@@ -23,6 +23,7 @@ class StoreTopicRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'description' => 'required',
         ];
     }
 }

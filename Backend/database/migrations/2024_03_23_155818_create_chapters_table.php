@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
-            $table->enum('type', ['pdf', 'video', 'blog', 'book', 'podcast']);
+            $table->text('content')->nullable();
+            $table->string('attachment')->nullable();
             $table->foreignId("course_id")
                 ->constrained("courses")
                 ->cascadeOnUpdate()

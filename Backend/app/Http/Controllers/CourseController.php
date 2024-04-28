@@ -15,20 +15,21 @@ class CourseController extends Controller
 {
     public function index()
     {
-        return new CourseCollection(Course::all());
+        return new CourseCollection(Course::with('topic', "chapters")->get());
     }
 
     public function store(StoreCourseRequest $request)
     {
         $validated = $request->validated();
         $validated['user_id'] = auth("sanctum")->id();
-        
+
         $course = Course::create($validated);
         return new CourseResource($course);
     }
- 
+
     public function show(Request $request, Course $course)
     {
+        $course->load('topic', 'chapters');
         return new CourseResource($course);
     }
 

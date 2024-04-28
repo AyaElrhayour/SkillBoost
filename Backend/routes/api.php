@@ -41,10 +41,6 @@ Route::apiResource('comments', CommentController::class);
 
 Route::get('topics', [TopicController::class, 'index']);
 
-// Route::apiResources([
-//     "courses" => CourseController::class,
-
-// ]);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('topics', TopicController::class)->middleware('restrictRole:Admin')->except('index');
 });

@@ -12,13 +12,13 @@ class Chapter extends Model
 {
     use HasFactory;
 
-    protected $table = "chapter";
+    protected $table = "chapters";
 
     protected $fillable = [
         'title',
         'content',
-        'type',
         'course_id',
+        'attachment',
     ];
 
     protected $hidden = [
@@ -35,10 +35,10 @@ class Chapter extends Model
         return $this->belongsTo(Course::class, 'topic_id');
     }
 
-    protected static function booted(): void{
+    // protected static function booted(): void{
 
-        static::addGlobalScope('user', function (Builder $builder) {
-            $builder->where('user_id', Auth::id());
-        });
-    }
+    //     static::addGlobalScope('user', function (Builder $builder) {
+    //         $builder->where('user_id', Auth::id());
+    //     });
+    // }
 }

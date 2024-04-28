@@ -33,10 +33,10 @@ class Comment extends Model
         return $this->belongsTo(Post::class, 'post_id');
     }
 
-    protected static function booted(): void{
+    // protected static function booted(): void{
 
-        static::addGlobalScope('user', function (Builder $builder) {
-            $builder->where('user_id', Auth::id());
-        });
-    }
+    //     static::addGlobalScope('user', function (Builder $builder) {
+    //         $builder->where('user_id', Auth::id());
+    //     });
+    // }
 }

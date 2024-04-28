@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
+            $table->string('img');
             $table->boolean("approved")->default(false);
             $table->timestamps();
             $table->foreignId("user_id")
