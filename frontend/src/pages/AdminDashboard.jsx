@@ -2,8 +2,17 @@ import AdminNavbar from "../shared/Navbars/AdminNavbar";
 import Sidebar from "../shared/Sidebar/Sidebar";
 import AdminStats from "../shared/Headers/AdminStats";
 import CardTable from "../shared/Cards/CardTable";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (Cookies.get("role") != "Admin") {
+      navigate("/blog");
+    }
+  }, []);
   return (
     <>
       <Sidebar />
