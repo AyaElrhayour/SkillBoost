@@ -23,13 +23,8 @@ class PostController extends Controller
     {
         $validated = $request->validated();
         $validated['user_id'] = auth("sanctum")->id();
-        if ($request->hasFile('img')) {
-            $imgPath = $request->file('img')->store('postImages', 'public');
-            $validated['img'] = $imgPath;
-        } else {
-            return response()->json(['error' => 'File not uploaded'], 422);
-        }
-
+        $imgPath = $request->file('img')->store('postImages', 'public');
+        $validated['img'] = $imgPath;
         $post = Post::create($validated);
         return new PostResource($post);
     }
