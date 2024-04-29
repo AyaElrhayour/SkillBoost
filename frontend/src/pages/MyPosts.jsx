@@ -30,7 +30,14 @@ const MyPosts = () => {
             <h1 className="text-2xl font-semibold">My Posts</h1>
             <p></p>
           </div>
-          {posts && posts.map((post) => <BlogCard onDeletePost={handleDeletePost} show={false} key={post.id} post={post} />)}
+          {posts &&
+            userPosts.map((post) => (
+              <BlogCard
+                onDeletePost={handleDeletePost}
+                key={post.id}
+                post={post}
+              />
+            ))}
         </div>
       </div>
     </>

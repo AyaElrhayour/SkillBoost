@@ -17,6 +17,14 @@ export const createPost = createAsyncThunk(
   }
 );
 
+export const createComment = createAsyncThunk(
+  'comments/createComment',
+  async (comment) => {
+    const response = await API.post(`comments`, comment);
+    return response.data; 
+  }
+);
+
 export const selectPost = createAsyncThunk(
   'posts/selectPost',
   async (id) => {
@@ -47,6 +55,15 @@ export const deletePost = createAsyncThunk(
   'posts/deletePost',
   async (id) => {
     const response = await API.delete(`posts/${id}`);
+    console.log(response);
+    return id;
+  }
+);
+
+export const deleteComment = createAsyncThunk(
+  'comments/deleteComment',
+  async (id) => {
+    const response = await API.delete(`comments/${id}`);
     console.log(response);
     return id;
   }
@@ -89,7 +106,10 @@ const postsSlice = createSlice({
         state.loading = false;
         state.posts.push(action.payload);
       })
-
+      .addCase(createComment.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts.comments.push(action.payload);
+      })
       .addCase(approvePost.fulfilled, (state, action) => {
         state.loading = false;
         const {id, title, content, img, approved, topic_id} = action.payload;
@@ -114,6 +134,10 @@ const postsSlice = createSlice({
       .addCase(deletePost.fulfilled, (state, action) => {
         state.loading = false;
         state.posts = state.posts.filter(post => post.id !== action.payload);
+      })
+      .addCase(deleteComment.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts.comments = state.posts.comments.filter(comment => comment.id !== action.payload);
       })
       .addCase(deletePost.rejected, (state, action) => {
         state.loading = false;
