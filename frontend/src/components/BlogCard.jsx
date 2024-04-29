@@ -3,8 +3,8 @@ import Cookies from "js-cookie";
 import Eye from "../assets/eyeIcon.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
 import { Dropdown } from "flowbite-react";
+
 const BlogCard = ({
   CoverImg = Teacher,
   post,
