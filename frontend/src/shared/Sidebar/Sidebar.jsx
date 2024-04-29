@@ -92,6 +92,25 @@ export default function Sidebar() {
               ) : (
                 ""
               )}
+
+              {Cookies.get("role") == "Admin" ? (
+                <li className="items-center">
+                  <Link
+                    className={
+                      "text-xs uppercase py-3 font-bold flex items-center gap-2 " +
+                      (window.location.href.indexOf("/unnaprovedPosts") !== -1
+                        ? "text-lightBlue-500 hover:text-lightBlue-600"
+                        : "text-blueGray-700 hover:text-blueGray-500")
+                    }
+                    to="/unnaprovedPosts"
+                  >
+                    <img src={seticon} alt="" />
+                    Unnaproved Posts
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
             </ul>
           </div>
         </div>
