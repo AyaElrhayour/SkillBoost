@@ -7,20 +7,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTopics } from "../../features/topicSlice";
 import { fetchCourses } from "../../features/coursesSlice";
 import API from "../../utils/API";
+import { fetchStudents, fetchTeachers } from "../../features/usersSlice";
 
 export default function HeaderStats() {
   const dispatch = useDispatch();
   const topics = useSelector((state) => state.topics.topics);
   const courses = useSelector((state) => state.courses.courses);
+  const teachers = useSelector((state) => state.users.teachers);
+  const students = useSelector((state) => state.users.students);
 
   const coursesCount =
-    courses && courses.filter((course) => course.approved === true).length;
+    courses && courses.length;
   const topicsCount = topics && topics.length;
-
 
   useEffect(() => {
     dispatch(fetchTopics());
     dispatch(fetchCourses());
+    dispatch(fetchTeachers());
+    dispatch(fetchStudents());
   }, []);
   return (
     <>
@@ -33,14 +37,14 @@ export default function HeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Teachers"
-                  statTitle="357"
+                  statTitle={teachers.length.toString()}
                   statIconColor="bg-blue-500"
                 />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Students"
-                  statTitle="256"
+                  statTitle={students.length.toString()}
                   statIconColor="bg-blue-400"
                 />
               </div>

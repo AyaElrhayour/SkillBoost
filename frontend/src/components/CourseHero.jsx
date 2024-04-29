@@ -13,8 +13,8 @@ const CourseHero = () => {
       <img src={BgHero} alt="" className="w-full" />
       <div className="relative bottom-44 left-64">
         <div className="flex flex-col items-stretch gap-3 ">
-          <form class="max-w-5xl ">
-            <div class="relative">
+          <form className="max-w-5xl ">
+            <div className="relative">
               <input
                 type="search"
                 id="default-search"
@@ -32,13 +32,13 @@ const CourseHero = () => {
           </form>
 
           <div className="max-w-5xl">
-            <div class="flex gap-2">
+            <div className="flex gap-2">
               <select
                 className="block w-1/4 p-4 ps-10 text-sm text-gray-900 border border-white rounded-full bg-gray-50 dark:placeholder-gray-400"
                 name=""
                 id=""
               >
-                <option selected>Subject</option>
+                <option defaultValue={""}>Subject</option>
                 <option value="">New Delhi</option>
                 <option value="">Istanbul</option>
                 <option value="">Jakarta</option>
@@ -48,27 +48,7 @@ const CourseHero = () => {
                 name=""
                 id=""
               >
-                <option selected>Level</option>
-                <option value="">New Delhi</option>
-                <option value="">Istanbul</option>
-                <option value="">Jakarta</option>
-              </select>
-              <select
-                className="block w-1/4 p-4 ps-10 text-sm text-gray-900 border border-white rounded-full bg-gray-50 dark:placeholder-gray-400"
-                name=""
-                id=""
-              >
-                <option selected>Language</option>
-                <option value="">New Delhi</option>
-                <option value="">Istanbul</option>
-                <option value="">Jakarta</option>
-              </select>
-              <select
-                className="block w-1/4 p-4 ps-10 text-sm text-gray-900 border border-white rounded-full bg-gray-50 "
-                name=""
-                id=""
-              >
-                <option selected>Learning Type</option>
+                <option defaultValue={""}>Level</option>
                 <option value="">New Delhi</option>
                 <option value="">Istanbul</option>
                 <option value="">Jakarta</option>

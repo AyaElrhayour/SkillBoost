@@ -15,7 +15,7 @@ class CourseController extends Controller
 {
     public function index()
     {
-        return new CourseCollection(Course::with('topic', "chapters")->get());
+        return new CourseCollection(Course::with('topic', "chapters", "teacher")->get());
     }
 
     public function store(StoreCourseRequest $request)
@@ -31,7 +31,7 @@ class CourseController extends Controller
 
     public function show(Request $request, Course $course)
     {
-        $course->load('topic', 'chapters');
+        $course->load('topic', 'chapters', "teacher");
         return new CourseResource($course);
     }
 

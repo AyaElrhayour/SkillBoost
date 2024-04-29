@@ -1,24 +1,36 @@
 import Teacher from "../assets/teacher.png";
 import Account from "../shared/Account";
 import Bar from "../assets/bar.png";
-const CourseCard = ({ CoverImg = Teacher }) => {
+import Button from "../shared/Button";
+const CourseCard = ({ course, CoverImg = Teacher }) => {
+  const getImage = (img) => {
+    return `http://localhost:8000/storage/${img}`;
+  };
   return (
     <div className="flex flex-col bg-white gap-4 items-stretch w-1/4 rounded-[10px] [box-shadow:_0.3em_0.3em_1em_rgba(0,0,0,0.1)] px-4 py-6">
       <div
         className="h-56 bg-cover bg-center"
-        style={{ backgroundImage: `url(${CoverImg})` }}
+        style={{ backgroundImage: `url(${getImage(course.cover)})` }}
       ></div>
 
       <div className="flex flex-col gap-4 ">
-        <h2 className="text-[#252641] text-lg font-semibold">
-        AWS Certified Solutions Architect
-        </h2>
-        <Account />
-        <div>
-          <img src={Bar} alt="" className="w-full" />
+        <h2 className="text-[#252641] text-lg font-semibold">{course.title}</h2>
+        <div className="flex justify-left items-center gap-4 p-4">
+          <img
+            src={getImage(course.teacher.profile_pic)}
+            className="rounded-full w-12 h-12"
+            alt=""
+          />
+          <h3 className="font-semibold text-xl">{course.teacher.name}</h3>
         </div>
-        <div className="flex justify-end">
-          <span>Lesson 5 of 7</span>
+        <p className="text-justify">{course.description}</p>
+        <div className="flex justify-between p-4">
+          <Button
+            bgColor="bg-blue-600"
+            color="text-white"
+            content={"Start Course"}
+          />
+          <span>{course.chapters.length} Chapters</span>
         </div>
       </div>
     </div>
