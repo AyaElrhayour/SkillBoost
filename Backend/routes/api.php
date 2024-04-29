@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ChapterStudentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::apiResource('posts', PostController::class);
 Route::put('posts/{post}/approve', [PostController::class, 'approvePost']);
 
 Route::apiResource('comments', CommentController::class);
+Route::get('/teachers', [UserController::class, 'getTeachers']);
+Route::get('/students', [UserController::class, 'getStudents']);
 
 Route::get('topics', [TopicController::class, 'index']);
 
