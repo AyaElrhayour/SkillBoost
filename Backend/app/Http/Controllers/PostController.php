@@ -34,6 +34,12 @@ class PostController extends Controller
         return new PostResource($post);
     }
 
+    public function approvePost(Post $post)
+    {
+       $post->update(['approved' => true]);
+        return new PostResource($post);
+    }
+
     public function show(Request $request, Post $post)
     {
         $post->load("user", "comments", "topic");

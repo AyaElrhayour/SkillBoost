@@ -36,6 +36,7 @@ Route::apiResource('chapters', ChapterController::class);
 Route::apiResource('chapterstudent', ChapterStudentController::class);
 
 Route::apiResource('posts', PostController::class);
+Route::put('posts/{post}/approve', [PostController::class, 'approvePost']);
 
 Route::apiResource('comments', CommentController::class);
 
