@@ -12,6 +12,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import CourseChapters from "./pages/CourseChpaters";
 import Post from "./pages/Post";
+import MyPosts from "./pages/MyPosts";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/adminDashboard" element={<AdminDashboard />} />
             <Route path="/chapters/:id" element={<CourseChapters />} />
             <Route path="/post/:id" element={<Post />} />
+            <Route path="/myPosts" element={<MyPosts />} />
           </Routes>
         </BrowserRouter>
       </Provider>

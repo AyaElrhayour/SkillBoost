@@ -22,7 +22,7 @@ const Post = () => {
         <AdminNavbar />
 
         <div className="flex flex-col gap-6 mx-16 bg-lightBlue-600 md:pt-32  pt-12">
-          {post && <BlogCard post={post} />}
+          {post && <BlogCard show={false} post={post} single={true} />}
         </div>
       </div>
     </>

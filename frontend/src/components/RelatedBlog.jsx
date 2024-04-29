@@ -4,13 +4,16 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import PostModal from "./PostModal";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPosts } from "../features/postsSlice";
+import { deletePost, fetchPosts } from "../features/postsSlice";
 
 const RelatedBlog = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
 
+  const handleDeletePost = (postId) => {
+    dispatch(deletePost(postId));
+  };
   useEffect(() => {
     dispatch(fetchPosts());
   }, []);
@@ -30,7 +33,7 @@ const RelatedBlog = () => {
         )}
       </div>
       <div className="flex justify-center gap-16">
-        {posts && posts.map((post) => <BlogCard key={post.id} post={post} />)}
+        {posts && posts.map((post) => <BlogCard onDeletePost={handleDeletePost} key={post.id} post={post} />)}
       </div>
       {open ? <PostModal open={open} setOpen={setOpen} /> : ""}
     </div>
