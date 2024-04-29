@@ -1,8 +1,7 @@
-import Teacher from "../assets/teacher.png";
-import Account from "../shared/Account";
-import Bar from "../assets/bar.png";
+import { useNavigate } from "react-router-dom";
 import Button from "../shared/Button";
-const CourseCard = ({ course, CoverImg = Teacher }) => {
+const CourseCard = ({ course }) => {
+  const navigate = useNavigate();
   const getImage = (img) => {
     return `http://localhost:8000/storage/${img}`;
   };
@@ -14,7 +13,18 @@ const CourseCard = ({ course, CoverImg = Teacher }) => {
       ></div>
 
       <div className="flex flex-col gap-4 ">
-        <h2 className="text-[#252641] text-lg font-semibold">{course.title}</h2>
+        <div className="flex justify-between p-4">
+          <h2 className="text-[#252641] text-lg font-semibold">
+            {course.title}
+          </h2>
+          <a
+            className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+            role="button"
+          >
+            {course.level}
+          </a>
+        </div>
+
         <div className="flex justify-left items-center gap-4 p-4">
           <img
             src={getImage(course.teacher.profile_pic)}
@@ -26,6 +36,7 @@ const CourseCard = ({ course, CoverImg = Teacher }) => {
         <p className="text-justify">{course.description}</p>
         <div className="flex justify-between p-4">
           <Button
+            onClick={() => navigate(`/chapters/${course.id}`)}
             bgColor="bg-blue-600"
             color="text-white"
             content={"Start Course"}

@@ -1,6 +1,4 @@
 import CourseCard from "./CourseCard";
-import JsImg from "../assets/js.png";
-import UIUX from "../assets/uxui.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCourses } from "../features/coursesSlice";

@@ -7,10 +7,12 @@ import Button from "../shared/Button";
 import ChapterCard from "../components/ChapterCard";
 import { useEffect, useState } from "react";
 import ChapterModal from "../components/ChapterModal";
+import Cookies from "js-cookie";
 
 const CourseChapters = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const userId = Cookies.get("user_id");
   const { id } = useParams();
   const course = useSelector((state) => state.courses.selectedCourse);
 
@@ -25,12 +27,16 @@ const CourseChapters = () => {
 
         <div className="flex justify-between mx-16 bg-lightBlue-600 md:pt-32  pt-12">
           <h1 className="text-2xl font-semibold">Chapters</h1>
-          <Button
-            content={"Add Chapter"}
-            bgColor="bg-[#7FB5FF]"
-            color="text-white"
-            onClick={() => setOpen(true)}
-          />
+          {course && userId == course.user_id ? (
+            <Button
+              content={"Add Chapter"}
+              bgColor="bg-[#7FB5FF]"
+              color="text-white"
+              onClick={() => setOpen(true)}
+            />
+          ) : (
+            ""
+          )}
         </div>
         <div className=" grid gap-4 mx-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 justify-center pt-4">
           {course &&
