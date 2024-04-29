@@ -25,7 +25,6 @@ class StorePostRequest extends FormRequest
             'title'  => 'required',
             'content'  => 'required',
             'topic_id'  => 'required',
-            'approved' => 'required',
             'img'  => 'required',
         ];
     }
