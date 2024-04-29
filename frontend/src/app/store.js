@@ -3,12 +3,14 @@ import authReducer from '../features/authSlice';
 import topicSlice from '../features/topicSlice';
 import courseSlice from '../features/coursesSlice.js';
 import postsSlice from '../features/postsSlice.js';
+import usersSlice from '../features/usersSlice.js';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     topics: topicSlice,
     courses: courseSlice,
-    posts: postsSlice
+    posts: postsSlice,
+    users: usersSlice
   },
 });
