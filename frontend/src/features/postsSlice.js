@@ -34,6 +34,15 @@ export const updatePost = createAsyncThunk(
   }
 );
 
+export const approvePost = createAsyncThunk(
+  'posts/approvePost',
+  async (id) => {
+    const response = await API.put(`posts/${id}/approve`);
+    console.log(response);
+    return response.data;
+  }
+);
+
 export const deletePost = createAsyncThunk(
   'posts/deletePost',
   async (id) => {
@@ -81,24 +90,21 @@ const postsSlice = createSlice({
         state.posts.push(action.payload);
       })
 
-      .addCase(updatePost.fulfilled, (state, action) => {
+      .addCase(approvePost.fulfilled, (state, action) => {
         state.loading = false;
-        const {id, cover , title, description,  level ,topic_id} = action.payload;
+        const {id, title, content, img, approved, topic_id} = action.payload;
         console.log(action.payload);
         state.posts = state.posts.map(post => {
           if(post.id !== id){
             return post;
           }else{
-            // console.log("in else")
             return {
               ...post,
-              cover: cover,
+              img: img,
               title: title,
-              description: description,
-              level: level,
+              content: content,
+              approved: approved,
               topic_id: topic_id,
-
-
             }
           }
           console.log("end")
