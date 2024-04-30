@@ -33,7 +33,7 @@ const RelatedBlog = () => {
           ""
         )}
       </div>
-      <div className="flex justify-center gap-16">
+      <div className="grid grid-cols-4 gap-8 sm:grid-cols-2 lg:grid-cols-4 justify-center pt-4 px-8">
         {posts && approvedPosts.map((post) => <BlogCard onDeletePost={handleDeletePost} key={post.id} post={post} />)}
       </div>
       {open ? <PostModal open={open} setOpen={setOpen} /> : ""}

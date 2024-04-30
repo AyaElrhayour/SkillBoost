@@ -42,6 +42,10 @@ Route::put('posts/{post}/approve', [PostController::class, 'approvePost']);
 Route::apiResource('comments', CommentController::class);
 Route::get('/teachers', [UserController::class, 'getTeachers']);
 Route::get('/students', [UserController::class, 'getStudents']);
+Route::get('/courses/level/{level}', [CourseController::class, 'getByLevel']);
+Route::get('/courses/topic/{topic_id}', [CourseController::class, 'getByTopic']);
+
+Route::get('/courses/search', [CourseController::class, 'search']);
 
 Route::get('topics', [TopicController::class, 'index']);
 

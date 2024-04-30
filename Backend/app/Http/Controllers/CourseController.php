@@ -18,6 +18,33 @@ class CourseController extends Controller
         return new CourseCollection(Course::with('topic', "chapters", "teacher")->get());
     }
 
+    public function getByLevel(Request $request, string $level)
+    {
+        $courses = Course::where('level', $level)->with('topic', 'chapters', 'teacher')->get();
+        return new CourseCollection($courses);
+    }
+
+    public function getByTopic(Request $request, string $topic)
+    {
+        $courses = Course::where('topic_id', $topic)->with('topic', 'chapters', 'teacher')->get();
+        return new CourseCollection($courses);
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('q');
+
+        $courses = Course::query()
+            ->where('title', 'like', "%$searchTerm%")
+            ->orWhereHas('teacher', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', "%$searchTerm%");
+            })
+            ->with('topic', 'chapters', 'teacher')
+            ->get();
+
+        return new CourseCollection($courses);
+    }
+
     public function store(StoreCourseRequest $request)
     {
         $validated = $request->validated();

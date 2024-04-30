@@ -23,7 +23,7 @@ const BlogCard = ({
     onDeletePost(post.id);
   };
   return (
-    <div className="flex flex-col bg-white gap-4 items-stretch w-1/3 rounded-[10px] [box-shadow:_0.3em_0.3em_1em_rgba(0,0,0,0.1)] px-4 py-6">
+    <div className="flex flex-col bg-white gap-4 items-stretch  rounded-[10px] [box-shadow:_0.3em_0.3em_1em_rgba(0,0,0,0.1)] px-4 py-6">
       {post.user_id == userId && !single ? (
         <Dropdown inline label="">
           <Dropdown.Item>
@@ -41,7 +41,7 @@ const BlogCard = ({
 
       <div
         className="h-64 bg-cover bg-center"
-        style={{ backgroundImage: `url(${CoverImg})` }}
+        style={{ backgroundImage: `url(${getUserImage(post.img)})` }}
       ></div>
 
       <div className="flex flex-col gap-4 ">

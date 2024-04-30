@@ -34,6 +34,13 @@ export const updateCourse = createAsyncThunk(
     return response.data.data; 
   }
 );
+export const getByLevel = createAsyncThunk('courses/level',
+async(level) => {
+  const response = await API.get(`courses/level/${level}`);
+  console.log(response);
+  return response.data.data;
+}
+)
 
 export const deleteCourse = createAsyncThunk(
   'courses/deleteCourse',
@@ -76,6 +83,11 @@ const coursesSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCourses.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedCourse = null;
+        state.courses = action.payload;
+      })
+      .addCase(getByLevel.fulfilled, (state, action) => {
         state.loading = false;
         state.selectedCourse = null;
         state.courses = action.payload;

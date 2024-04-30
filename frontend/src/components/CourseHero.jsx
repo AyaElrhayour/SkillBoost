@@ -1,7 +1,33 @@
 import BgHero from "../assets/courseshero.png";
 import blueLogo from "../assets/blue_logo.png";
 import Navigation from "../shared/Navigation";
-const CourseHero = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchTopics } from "../features/topicSlice";
+const CourseHero = ({ onSelectLevel }) => {
+  const dispatch = useDispatch();
+  const topics = useSelector((state) => state.topics.topics);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedLevel, setSelectedLevel] = useState("");
+
+  const handleLevelChange = (e) => {
+    const level = e.target.value;
+    setSelectedLevel(level);
+    onSelectLevel(level); // Pass selected level back to parent component
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    dispatch(fetchTopics());
+  }, [selectedTopic]);
+
   return (
     <div className="bg-[#EEF5FF]">
       <Navigation
@@ -34,24 +60,31 @@ const CourseHero = () => {
           <div className="max-w-5xl">
             <div className="flex gap-2">
               <select
+                id="topic"
+                name="topic_id"
+                onChange={handleChange}
                 className="block w-1/4 p-4 ps-10 text-sm text-gray-900 border border-white rounded-full bg-gray-50 dark:placeholder-gray-400"
-                name=""
-                id=""
               >
-                <option defaultValue={""}>Subject</option>
-                <option value="">New Delhi</option>
-                <option value="">Istanbul</option>
-                <option value="">Jakarta</option>
+                <option defaultValue={""}>Select topic</option>
+                {topics.map((topic) => (
+                  <option key={topic.id} value={topic.id}>
+                    {topic.name}
+                  </option>
+                ))}
               </select>
+
               <select
+                id="level"
+                name="level"
+                value={selectedLevel}
+                onChange={handleLevelChange}
                 className="block w-1/4 p-4 ps-10 text-sm text-gray-900 border border-white rounded-full bg-gray-50 dark:placeholder-gray-400"
-                name=""
-                id=""
               >
                 <option defaultValue={""}>Level</option>
-                <option value="">New Delhi</option>
-                <option value="">Istanbul</option>
-                <option value="">Jakarta</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+                <option value="proficient">Proficient</option>
               </select>
             </div>
           </div>

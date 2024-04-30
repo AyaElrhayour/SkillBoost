@@ -1,24 +1,33 @@
 import Button from "./Button";
 import white_logo from "../assets/white_logo.png";
 import Account from "./Account";
-
+import { Link } from "react-router-dom";
 
 const Navigation = ({
   textColor = "text-white",
   logoSrc = white_logo,
   showButtons = true,
-  margin = "ml-48"
+  margin = "ml-48",
 }) => {
   return (
     <nav>
       <div className={`flex justify-around items-center ${margin}`}>
-        <ul className={`flex gap-20 items-center text-lg font-semibold ${textColor}`}>
-          <li>Home</li>
-          <li>Course</li>
+        <ul
+          className={`flex gap-20 items-center text-lg font-semibold ${textColor}`}
+        >
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            {" "}
+            <a href="/Courses">Course</a>
+          </li>
           <li>
             <img src={logoSrc} alt="Logo" className="w-20" />
           </li>
-          <li>Blog</li>
+          <li>
+            <a href="/blog">Blog</a>
+          </li>
           <li>About Us</li>
         </ul>
         {showButtons ? (
@@ -27,8 +36,9 @@ const Navigation = ({
             <Button bgColor="bg-[#A5CAFE]" content={"Sign Up"} />
           </div>
         ) : (
-          
-          <Account />
+          <Account>
+            <Link></Link>
+          </Account>
         )}
       </div>
     </nav>
