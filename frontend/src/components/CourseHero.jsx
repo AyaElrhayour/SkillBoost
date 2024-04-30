@@ -4,7 +4,7 @@ import Navigation from "../shared/Navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchTopics } from "../features/topicSlice";
-const CourseHero = ({ onSelectLevel }) => {
+const CourseHero = ({ onSelectLevel, onSelectTopic }) => {
   const dispatch = useDispatch();
   const topics = useSelector((state) => state.topics.topics);
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -13,7 +13,13 @@ const CourseHero = ({ onSelectLevel }) => {
   const handleLevelChange = (e) => {
     const level = e.target.value;
     setSelectedLevel(level);
-    onSelectLevel(level); // Pass selected level back to parent component
+    onSelectLevel(level);
+  };
+
+  const handleTopicChange = (e) => {
+    const topic = e.target.value;
+    setSelectedTopic(topic);
+    onSelectTopic(topic);
   };
 
   const handleChange = (e) => {
@@ -62,7 +68,8 @@ const CourseHero = ({ onSelectLevel }) => {
               <select
                 id="topic"
                 name="topic_id"
-                onChange={handleChange}
+                value={selectedTopic}
+                onChange={handleTopicChange}
                 className="block w-1/4 p-4 ps-10 text-sm text-gray-900 border border-white rounded-full bg-gray-50 dark:placeholder-gray-400"
               >
                 <option defaultValue={""}>Select topic</option>

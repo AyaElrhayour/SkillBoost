@@ -42,6 +42,14 @@ async(level) => {
 }
 )
 
+export const getByTopic = createAsyncThunk('courses/topic',
+async(topic_id) => {
+  const response = await API.get(`courses/topic/${topic_id}`);
+  console.log(response);
+  return response.data.data;
+}
+)
+
 export const deleteCourse = createAsyncThunk(
   'courses/deleteCourse',
   async (id) => {
@@ -88,6 +96,11 @@ const coursesSlice = createSlice({
         state.courses = action.payload;
       })
       .addCase(getByLevel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedCourse = null;
+        state.courses = action.payload;
+      })
+      .addCase(getByTopic.fulfilled, (state, action) => {
         state.loading = false;
         state.selectedCourse = null;
         state.courses = action.payload;

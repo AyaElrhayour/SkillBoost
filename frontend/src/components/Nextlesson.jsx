@@ -2,19 +2,21 @@ import CourseCard from "./CourseCard";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchCourses, getByLevel } from "../features/coursesSlice";
+import { fetchCourses, getByLevel, getByTopic } from "../features/coursesSlice";
 
-const Nextlesson = ({ selectedLevel }) => {
+const Nextlesson = ({ selectedLevel, selectedTopic }) => {
   const courses = useSelector((state) => state.courses.courses);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedLevel) {
       dispatch(getByLevel(selectedLevel));
+    } else if (selectedTopic) {
+      dispatch(getByTopic(selectedTopic));
     } else {
       dispatch(fetchCourses());
     }
-  }, [dispatch, selectedLevel]);
+  }, [selectedLevel, selectedTopic]);
   return (
     <div className="flex flex-col gap-8">
       <div className="flex justify-around gap-[40rem]">
