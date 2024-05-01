@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createPopper } from "@popperjs/core";
-import Account from "../Account";
-
+import { useDispatch, useSelector } from "react-redux";
+import { findAuthUser } from "../../features/authSlice";
 
 const UserDropdown = () => {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const getImage = (img) => {
+    return `http://localhost:8000/storage/${img}`;
+  };
+
+  useEffect(() => {
+    dispatch(findAuthUser());
+  }, []);
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -29,9 +38,14 @@ const UserDropdown = () => {
         }}
       >
         <div className="items-center flex">
-
-            <Account mrgn="mr-0"/>
-          
+          <div className="flex justify-left items-center gap-4 p-4">
+            <img
+              src={getImage(user && user.profile_pic)}
+              className="rounded-full w-12 h-12"
+              alt=""
+            />
+            <h3 className="font-semibold text-xl">{user && user.name}</h3>
+          </div>
         </div>
       </a>
       <div

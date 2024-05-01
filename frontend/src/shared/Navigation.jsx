@@ -2,6 +2,9 @@ import Button from "./Button";
 import white_logo from "../assets/white_logo.png";
 import Account from "./Account";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { findAuthUser } from "../features/authSlice";
 
 const Navigation = ({
   textColor = "text-white",
@@ -9,6 +12,15 @@ const Navigation = ({
   showButtons = true,
   margin = "ml-48",
 }) => {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const getImage = (img) => {
+    return `http://localhost:8000/storage/${img}`;
+  };
+
+  useEffect(() => {
+    dispatch(findAuthUser());
+  }, []);
   return (
     <nav>
       <div className={`flex justify-around items-center ${margin}`}>
@@ -36,9 +48,14 @@ const Navigation = ({
             <Button bgColor="bg-[#A5CAFE]" content={"Sign Up"} />
           </div>
         ) : (
-          <Account>
-            <Link></Link>
-          </Account>
+          <div className="flex justify-left items-center gap-4 p-4">
+            <img
+              src={getImage(user && user.profile_pic)}
+              className="rounded-full w-12 h-12"
+              alt=""
+            />
+            <h3 className="font-semibold text-xl">{user && user.name}</h3>
+          </div>
         )}
       </div>
     </nav>

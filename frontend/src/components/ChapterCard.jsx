@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import Button from "../shared/Button";
 import { deleteChapter } from "../features/coursesSlice";
+import { useNavigate } from "react-router-dom";
 
 const ChapterCard = ({ chapter }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDeleteChapter = (id) => {
     dispatch(deleteChapter(id))
@@ -37,14 +39,14 @@ const ChapterCard = ({ chapter }) => {
       </div>
 
       <div className="flex items-center justify-between mt-4">
-        <a
-          href="#"
+        <span
+          onClick={() => navigate(`/chapter/${chapter.id}`)}
           className="text-blue-600 dark:text-blue-400 hover:underline"
           tabIndex="0"
           role="link"
         >
           Read more
-        </a>
+        </span>
 
         <div className="flex items-center">
           <Button

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import UserDropdown from "../Dropdowns/UserDropdown";
 
 
+
 export default function Navbar() {
+
   return (
     <>
       {/* Navbar */}

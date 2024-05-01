@@ -14,6 +14,7 @@ import CourseChapters from "./pages/CourseChpaters";
 import Post from "./pages/Post";
 import MyPosts from "./pages/MyPosts";
 import UnapprovedPosts from "./pages/UnapprovedPosts";
+import ChapterContent from "./pages/ChapterContent";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/post/:id" element={<Post />} />
             <Route path="/myPosts" element={<MyPosts />} />
             <Route path="/unnaprovedPosts" element={<UnapprovedPosts />} />
+            <Route path="/chapter/:id" element={<ChapterContent />} />
           </Routes>
         </BrowserRouter>
       </Provider>

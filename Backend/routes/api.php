@@ -45,7 +45,7 @@ Route::get('/students', [UserController::class, 'getStudents']);
 Route::get('/courses/level/{level}', [CourseController::class, 'getByLevel']);
 Route::get('/courses/topic/{topic_id}', [CourseController::class, 'getByTopic']);
 
-Route::get('/courses/search', [CourseController::class, 'search']);
+Route::get('/courses/search?{query?}', [CourseController::class, 'search']);
 
 Route::get('topics', [TopicController::class, 'index']);
 

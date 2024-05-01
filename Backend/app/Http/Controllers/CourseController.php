@@ -32,7 +32,7 @@ class CourseController extends Controller
 
     public function search(Request $request)
     {
-        $searchTerm = $request->input('q');
+        $searchTerm = $request->query('q') ?? $request->input('query');
 
         $courses = Course::query()
             ->where('title', 'like', "%$searchTerm%")
