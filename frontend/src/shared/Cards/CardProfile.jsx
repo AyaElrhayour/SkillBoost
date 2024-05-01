@@ -2,8 +2,20 @@ import account from "../../assets/pfp.png";
 import pen from "../../assets/pen.png";
 import location from "../../assets/location.png";
 import person from "../../assets/prsn.png";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { findAuthUser } from "../../features/authSlice";
 
 export default function CardProfile() {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+  const getImage = (img) => {
+    return `http://localhost:8000/storage/${img}`;
+  };
+
+  useEffect(() => {
+    dispatch(findAuthUser());
+  }, []);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-[#D8E0FF] w-full mb-6 shadow-xl rounded-t-full  pt-20">
@@ -12,7 +24,7 @@ export default function CardProfile() {
             <div className="w-full px-4 flex justify-center">
               <div className="relative">
                 <img
-                  src={account}
+                  src={user && getImage(user.profile_pic)}
                   className=" h-60 align-middle  w-60 border-solid border-[#00185C] border-4 rounded-full "
                 />
               </div>
@@ -21,7 +33,7 @@ export default function CardProfile() {
               <div className="flex justify-center py-4 lg:pt-4 pt-8">
                 <div className="mr-4 p-3 text-center flex gap-2 items-center">
                   <span className="text-2xl font-semibold block leading-10 text-[#00185C] tracking-wide text-blueGray-600">
-                    Lina Mora
+                    {user && user.name}
                   </span>
                   <img src={pen} alt="" />
                 </div>
@@ -48,7 +60,7 @@ export default function CardProfile() {
                 </div>
                 <div className="flex items-center gap-4">
                   <img src={person} alt="" />
-                  <p>Member since May 05,2024</p>
+                  <p>Member since {user && user.created_at.split("T")[0]}</p>
                 </div>
               </div>
             </div>
