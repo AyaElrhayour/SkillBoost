@@ -12,7 +12,7 @@ import {
 
 export default function CardTable({ color }) {
   const dispatch = useDispatch();
-  const topics = useSelector((state) => state.topics.topics);
+  const { topics, loading } = useSelector((state) => state.topics);
   const [open, setOpen] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
   const [deleted, setDeleted] = useState(false);
@@ -96,7 +96,7 @@ export default function CardTable({ color }) {
               </tr>
             </thead>
             <tbody>
-              {topics.length > 0 ? (
+              {!loading ? (
                 topics.map((topic) => (
                   <tr key={topic.id}>
                     <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
@@ -137,7 +137,7 @@ export default function CardTable({ color }) {
                   </tr>
                 ))
               ) : (
-                <div>no topics found</div>
+                <div>Fetching data</div>
               )}
             </tbody>
           </table>

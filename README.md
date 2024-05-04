@@ -334,6 +334,10 @@ https://ayaelrhayour123.atlassian.net/jira/software/projects/SKIL/boards/8?atlOr
 
 https://docs.google.com/document/d/1tRS56XYiezFpW4kTMPVhWl8pUO7uovndkAsD04rbq2g/edit?usp=sharing
 
+## Lien presentation
+
+https://www.canva.com/design/DAGESH7vwxw/N8otUjluT5vZZ_7CP4rR0A/edit?utm_content=DAGESH7vwxw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
 ## Support
 
 For support, email ayaelrhayour123@gmail.com .

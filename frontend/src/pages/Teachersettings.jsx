@@ -1,9 +1,18 @@
 import Sidebar from "../shared/Sidebar/Sidebar";
 import AdminNavbar from "../shared/Navbars/AdminNavbar";
-import HeaderStats from "../shared/Headers/AdminStats";
-import CreatingCourse from "../components/CreatingCourse";
 import Settings from "../admin/Settings";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Teachersettings = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <>
       <Sidebar />

@@ -26,8 +26,7 @@ const LoginPage = () => {
     dispatch(loginUser(inputs))
       .then((res) => {
         console.log(res);
-        const accessToken = res.payload.access_token;
-        Cookies.set("token", accessToken, { expires: 1 });
+        Cookies.set("token", res.payload.access_token);
         Cookies.set("user_id", res.payload.data.id);
         Cookies.set("role", res.payload.data.role);
         if (res.payload.data.role == "Admin") {
