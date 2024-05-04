@@ -5,6 +5,7 @@ import CardTable from "../shared/Cards/CardTable";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import BannedUsers from "../components/BannedUsers";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const AdminDashboard = () => {
         <AdminStats />
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
           <CardTable />
+          <BannedUsers/>
         </div>
       </div>
     </>

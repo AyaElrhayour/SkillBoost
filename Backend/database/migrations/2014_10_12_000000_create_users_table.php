@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_pic')->nullable();
+            $table->string('about')->nullable();
+            $table->boolean('is_banned')->default(false);
             $table->enum('role', ['Admin', 'Teacher', 'Student']);
             $table->rememberToken();
             $table->timestamps();

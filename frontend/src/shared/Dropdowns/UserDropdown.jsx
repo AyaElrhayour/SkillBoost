@@ -1,13 +1,25 @@
 import React, { useEffect } from "react";
 import { createPopper } from "@popperjs/core";
 import { useDispatch, useSelector } from "react-redux";
-import { findAuthUser } from "../../features/authSlice";
+import { findAuthUser, logout } from "../../features/authSlice";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const UserDropdown = () => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const getImage = (img) => {
     return `http://localhost:8000/storage/${img}`;
+  };
+
+  const handleLogout = () => {
+    dispatch(logout()).then(() => {
+      Cookies.remove("token");
+      Cookies.remove("user_id");
+      Cookies.remove("role");
+      navigate("/login");
+    });
   };
 
   useEffect(() => {
@@ -65,15 +77,14 @@ const UserDropdown = () => {
           Account
         </a>
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
-        <a
-          href="#pablo"
+        <span
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 cursor-pointer px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
-          onClick={(e) => e.preventDefault()}
+          onClick={handleLogout}
         >
           Logout
-        </a>
+        </span>
       </div>
     </>
   );

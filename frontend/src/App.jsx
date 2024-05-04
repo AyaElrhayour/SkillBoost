@@ -15,6 +15,7 @@ import Post from "./pages/Post";
 import MyPosts from "./pages/MyPosts";
 import UnapprovedPosts from "./pages/UnapprovedPosts";
 import ChapterContent from "./pages/ChapterContent";
+import IncoursePage from "./pages/IncoursePage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="/myPosts" element={<MyPosts />} />
             <Route path="/unnaprovedPosts" element={<UnapprovedPosts />} />
             <Route path="/chapter/:id" element={<ChapterContent />} />
+            <Route path="/course/chapter/:id" element={<IncoursePage />} />
           </Routes>
         </BrowserRouter>
       </Provider>

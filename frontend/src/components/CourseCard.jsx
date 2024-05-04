@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../shared/Button";
+
 const CourseCard = ({ course }) => {
   const navigate = useNavigate();
   const getImage = (img) => {
@@ -36,7 +37,7 @@ const CourseCard = ({ course }) => {
         <p className="text-justify">{course.description}</p>
         <div className="flex justify-between p-4">
           <Button
-            onClick={() => navigate(`/chapters/${course.id}`)}
+            onClick={() => navigate(`/course/chapter/${course.id}`)}
             bgColor="bg-blue-600"
             color="text-white"
             content={"Start Course"}

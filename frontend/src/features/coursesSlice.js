@@ -50,6 +50,14 @@ async(topic_id) => {
 }
 )
 
+export const getByTitle = createAsyncThunk('courses/title',
+async(title) => {
+  const response = await API.get(`/search/${title}`);
+  console.log(response);
+  return response.data.data;
+}
+)
+
 export const deleteCourse = createAsyncThunk(
   'courses/deleteCourse',
   async (id) => {
@@ -101,6 +109,11 @@ const coursesSlice = createSlice({
         state.courses = action.payload;
       })
       .addCase(getByTopic.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedCourse = null;
+        state.courses = action.payload;
+      })
+      .addCase(getByTitle.fulfilled, (state, action) => {
         state.loading = false;
         state.selectedCourse = null;
         state.courses = action.payload;

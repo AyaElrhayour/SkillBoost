@@ -28,6 +28,7 @@ const RegisterPage = () => {
       setProfilePic(e.target.files[0]);
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -35,7 +36,9 @@ const RegisterPage = () => {
     formData.append("email", inputs.email);
     formData.append("password", inputs.password);
     formData.append("role", inputs.role);
-    formData.append("profile_pic", profilePic);
+    if (profilePic) {
+      formData.append("profile_pic", profilePic);
+    }
     dispatch(registerUser(formData))
       .then(() => {
         navigate("/login");
@@ -103,18 +106,7 @@ const RegisterPage = () => {
                   <option value="Student">Student</option>
                 </select>
               </div>
-              <div className="flex flex-col pt-4">
-                <label htmlFor="profile_pic" className="text-lg">
-                  Profile Pic
-                </label>
-                <input
-                  type="file"
-                  id="profile_pic"
-                  name="profile_pic"
-                  onChange={handleProfilePic}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                />
-              </div>
+
 
               <button
                 type="submit"

@@ -1,5 +1,3 @@
-
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import API from '../utils/API';
 import Cookies from 'js-cookie';
@@ -8,7 +6,7 @@ import Cookies from 'js-cookie';
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (userData) => {
-    const response = await API.post(`auth/register`, userData);
+    const response = await API.post('auth/register', userData);
     return response.data;
   }
 );
@@ -16,8 +14,17 @@ export const registerUser = createAsyncThunk(
 export const findAuthUser = createAsyncThunk(
   'auth/getUser',
   async () => {
-    const response = await API.get(`user`);
-    console.log(response.data);
+    const response = await API.get('user');
+    console.log(response);
+    return response.data;
+  }
+);
+
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async () => {
+    const response = await API.get('logout');
+    console.log(response);
     return response.data;
   }
 );
@@ -25,7 +32,7 @@ export const findAuthUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }) => {
-    const response = await API.post(`auth/login`, { email, password });
+    const response = await API.post('auth/login', { email, password });
     return response.data;
   }
 );
@@ -42,6 +49,7 @@ const authSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
+
     builder
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -67,11 +75,15 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
       })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = null;
+      })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
-      
+
   },
 });
 

@@ -30,20 +30,7 @@ class CourseController extends Controller
         return new CourseCollection($courses);
     }
 
-    public function search(Request $request)
-    {
-        $searchTerm = $request->query('q') ?? $request->input('query');
 
-        $courses = Course::query()
-            ->where('title', 'like', "%$searchTerm%")
-            ->orWhereHas('teacher', function ($query) use ($searchTerm) {
-                $query->where('name', 'like', "%$searchTerm%");
-            })
-            ->with('topic', 'chapters', 'teacher')
-            ->get();
-
-        return new CourseCollection($courses);
-    }
 
     public function store(StoreCourseRequest $request)
     {
@@ -61,6 +48,17 @@ class CourseController extends Controller
         $course->load('topic', 'chapters', "teacher");
         return new CourseResource($course);
     }
+
+    public function searchByTitle(Request $request, $title)
+    {
+        $courses = Course::where('title', 'like', '%' . $title . '%')
+            ->with('topic', 'chapters', 'teacher')
+            ->get();
+
+        return new CourseCollection($courses);
+    }
+
+
 
     public function update(UpdateCourseRequest $request, Course $course)
     {

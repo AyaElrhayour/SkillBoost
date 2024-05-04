@@ -4,23 +4,32 @@ import Navigation from "../shared/Navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchTopics } from "../features/topicSlice";
-const CourseHero = ({ onSelectLevel, onSelectTopic }) => {
+const CourseHero = ({ onSelectLevel, onSelectTopic, onSelectTitle }) => {
   const dispatch = useDispatch();
   const topics = useSelector((state) => state.topics.topics);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState("");
+  const [selectedTitle, setSelectedTitle] = useState("");
 
   const handleLevelChange = (e) => {
     const level = e.target.value;
     setSelectedLevel(level);
-    onSelectLevel(level);
+    onSelectLevel(level); 
   };
+
 
   const handleTopicChange = (e) => {
     const topic = e.target.value;
     setSelectedTopic(topic);
-    onSelectTopic(topic);
+    onSelectTopic(topic); 
   };
+
+  const handleTitleChange = (e) => {
+    const title = e.target.value;
+    setSelectedTitle(title);
+    onSelectTitle(title); 
+  };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +59,9 @@ const CourseHero = ({ onSelectLevel, onSelectTopic }) => {
               <input
                 type="search"
                 id="default-search"
+                name="title"
+                value={selectedTitle}
+                onChange={handleTitleChange}
                 className="block w-full p-4 pr-16 ps-10 text-sm text-gray-900 border border-white rounded-full bg-gray-50 dark:placeholder-gray-400"
                 placeholder="Find your course"
                 required

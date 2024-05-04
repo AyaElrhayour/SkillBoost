@@ -32,7 +32,7 @@ class Chapter extends Model
 
     public function course(): BelongsTo
     {
-        return $this->belongsTo(Course::class, 'topic_id');
+        return $this->belongsTo(Course::class);
     }
 
     // protected static function booted(): void{

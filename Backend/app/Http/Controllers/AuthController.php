@@ -54,20 +54,20 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        $user = auth()->user();
+        $user = Auth::guard('sanctum')->user();
 
-        if ($user) {
-            $user->tokens()->delete();
-
-            return [
-                'message' => 'User logged out'
-            ];
+        if (!$user) {
+            return response()->json(['error' => 'Unauthenticated'], 401);
         }
 
-        return response()->json([
-            'message' => 'Unauthenticated'
-        ], 401);
+        try {
+            $user->tokens()->delete();
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Unable to revoke tokens'], 500);
+        }
+
+        return response()->json(['message' => 'Tokens revoked successfully']);
     }
 }

@@ -1,10 +1,10 @@
 import Button from "./Button";
 import white_logo from "../assets/white_logo.png";
-import Account from "./Account";
-import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { findAuthUser } from "../features/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = ({
   textColor = "text-white",
@@ -17,7 +17,16 @@ const Navigation = ({
   const getImage = (img) => {
     return `http://localhost:8000/storage/${img}`;
   };
-
+  const navigate = useNavigate();
+  const routing = () => {
+    if (Cookies.get("role") == "Admin") {
+      navigate("/adminDashboard");
+    } else if (Cookies.get("role" == "Teacher")) {
+      navigate("/teacherDashboard");
+    } else {
+      navigate("/courses");
+    }
+  };
   useEffect(() => {
     dispatch(findAuthUser());
   }, []);
@@ -42,13 +51,16 @@ const Navigation = ({
           </li>
           <li>About Us</li>
         </ul>
-        {showButtons ? (
+        {showButtons && !Cookies.get("token") ? (
           <div className="flex justify-end gap-8 ml-28">
             <Button content={"Log In"} />
             <Button bgColor="bg-[#A5CAFE]" content={"Sign Up"} />
           </div>
         ) : (
-          <div className="flex justify-left items-center gap-4 p-4">
+          <div
+            onClick={routing}
+            className="flex justify-left items-center gap-4 p-4"
+          >
             <img
               src={getImage(user && user.profile_pic)}
               className="rounded-full w-12 h-12"

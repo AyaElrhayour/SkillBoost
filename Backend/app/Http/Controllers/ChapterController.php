@@ -28,6 +28,12 @@ class ChapterController extends Controller
         return new ChapterResource($chapter);
     }
 
+    public function show(Request $request, Chapter $chapter)
+    {
+        $chapter->load('course.topic', 'course.teacher');
+        return new ChapterResource($chapter);
+    }
+
     public function update(UpdateChapterRequest $request, Chapter $chapter)
     {
         $validated = $request->validated();
